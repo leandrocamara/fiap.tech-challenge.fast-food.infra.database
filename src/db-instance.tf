@@ -1,5 +1,5 @@
 resource "aws_db_instance" "db_instance" {
-  identifier        = "${var.projectName}_db"
+  identifier        = var.projectName
   db_name           = var.projectName
   allocated_storage = 1
   engine            = "postgres"
