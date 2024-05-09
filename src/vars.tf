@@ -3,7 +3,7 @@ variable "regionDefault" {
 }
 
 variable "projectName" {
-  default = "fast-food-db"
+  default = "fastfood"
 }
 
 variable "instanceClass" {
