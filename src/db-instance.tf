@@ -1,7 +1,7 @@
 resource "aws_db_instance" "db_instance" {
   identifier        = var.projectName
   db_name           = var.projectName
-  allocated_storage = 1
+  allocated_storage = 5
   engine            = "postgres"
   engine_version    = "11.22" # aws rds describe-db-engine-versions --engine postgres --output table --region us-east-1
   instance_class    = var.instanceClass
