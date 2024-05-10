@@ -114,7 +114,7 @@ jobs:
   CD:
     needs: CI
     runs-on: ubuntu-latest
-    # if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     defaults:
       run:
         working-directory: ${{ env.TF_ACTION_WORKING_DIR }}
@@ -135,9 +135,6 @@ jobs:
           terraform apply -auto-approve \
             -var "username=${{ env.DB_USERNAME }}" \
             -var "password=${{ env.DB_PASSWORD }}"
-
-      - name: DB Endpoint
-        run: terraform output -json dbEndpoint
 
       - uses: trstringer/manual-approval@v1
         timeout-minutes: 60

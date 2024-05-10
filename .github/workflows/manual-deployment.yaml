@@ -47,8 +47,6 @@ jobs:
             -var "username=${{ env.DB_USERNAME }}" \
             -var "password=${{ env.DB_PASSWORD }}"
 
-      - run: terraform output -json dbEndpoint
-
       - uses: trstringer/manual-approval@v1
         timeout-minutes: ${{ fromJSON(github.event.inputs.timeoutForDestroyApproval) }}
         with:
