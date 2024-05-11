@@ -51,7 +51,7 @@ jobs:
         timeout-minutes: ${{ fromJSON(github.event.inputs.timeoutForDestroyApproval) }}
         with:
           secret: ${{ github.TOKEN }}
-          approvers: leandrocamara # TODO: Add other approvers
+          approvers: leandrocamara,mpatricio007 # TODO: Add other approvers
           minimum-approvals: 1
           issue-title: "$ terraform destroy"
           issue-body: "Approve to undo manual `$ terraform apply`"
