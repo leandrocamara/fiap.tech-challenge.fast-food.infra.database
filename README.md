@@ -8,7 +8,7 @@ A infraestrutura é mantida com o [**_Terraform_**](https://www.terraform.io/) e
 
 Após a execução dos [_Workflows_](https://github.com/leandrocamara/fiap.tech-challenge.fast-food.infra.database/actions) (GitHub Actions), um banco de dados [**_RDS_**](https://docs.aws.amazon.com/eks/) (_Relational Database Service_) é provisionado na _AWS_.
 
-Há duas maneiras de executar e criar o _cluster_:
+Há duas maneiras de executar e criar o banco de dados:
 
 1. Realizando um `push` na `main`, por meio de um `Merge Pull Request`;
 
