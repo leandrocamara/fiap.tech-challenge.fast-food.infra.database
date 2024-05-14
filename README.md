@@ -28,7 +28,20 @@ Ao final da execução do `$ terraform apply`, é impresso o **_Endpoint_** do _
 
 ## Documentação
 
-TODO
+O banco escolhido foi o PostgreSQL que é um banco de dados relacional.
+
+A escolha do banco se deu por algun fatores:
+- Conhecimento do grupo de trabalho sobre o banco de dados;
+- Licença *opensource*;
+- Bom desempenho com grandes volumes de dados e com carga de requisições altas;
+- Comunidade ativa, com lançamento de patchs e novas versões constantemente;
+- Suporte a replicação;
+- Aderente ao padrão SQL ANSI;
+- Suporte a transações ACID (Atomicity, Consistency, Isolation and Durability)
+
+Nosso banco de dados ainda possui poucas tabelas, mas todas elas com os devidos relacionamentos e definições de chave primária e chaves estrangeiras.
+![ER](./docs/er.png)
+Diagrama ER do banco de dados PostgreSQL no status atual do projeto.
 
 ## Tech Challenge
 Projeto para a curso de [Pós Graduação FIAP - Software Architecture](https://postech.fiap.com.br/curso/software-architecture/).
