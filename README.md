@@ -43,6 +43,67 @@ Nosso banco de dados ainda possui poucas tabelas, mas todas elas com os devidos 
 ![ER](./docs/er.png)
 Diagrama ER do banco de dados PostgreSQL no status atual do projeto.
 
+
+## Tabelas
+
+### Tabela "customers"
+
+A tabela `customers` armazena informações sobre os clientes do sistema.
+
+| Campo    | Tipo         | Restrições         | Observações                      |
+|----------|--------------|---------------------|----------------------------------|
+| Id       | UUID         | Chave Primária      | Identificador único do cliente   |
+| Cpf      | VARCHAR(11)  | Não Nulo            | Número de CPF do cliente         |
+| Name     | VARCHAR(100) | Não Nulo            | Nome completo do cliente          |
+| Email    | VARCHAR(100) | Não Nulo            | Endereço de email do cliente      |
+
+### Tabela "products"
+
+A tabela `products` armazena informações sobre os produtos disponíveis no sistema.
+
+| Campo       | Tipo          | Restrições         | Observações                                      |
+|-------------|---------------|---------------------|--------------------------------------------------|
+| Id          | UUID          | Chave Primária      | Identificador único do produto                   |
+| Name        | VARCHAR(100)  | Não Nulo            | Nome do produto                                  |
+| Category    | SMALLINT      | Não Nulo            | Categoria do produto (Meal = 0, Side = 1, Drink = 2, Dessert = 3) |
+| Price       | NUMERIC(10, 2)| Não Nulo            | Preço do produto                                |
+| Description | VARCHAR(200)  | Não Nulo            | Descrição do produto                            |
+| Images      | JSONB         |                     | Lista com as URLs das imagens do produto    |
+
+### Tabela "orders"
+
+A tabela `orders` registra os pedidos feitos pelos clientes.
+
+| Campo          | Tipo         | Restrições         | Observações                                     |
+|----------------|--------------|---------------------|-------------------------------------------------|
+| Id             | UUID         | Chave Primária      | Identificador único do pedido                    |
+| CustomerId     | UUID         | Chave Estrangeira (Referencia "customers") | ID do cliente que fez o pedido      |
+| OrderNumber    | INT          | Não Nulo            | Número do pedido                                 |
+| Status         | SMALLINT     | Não Nulo            | Status do pedido (PaymentPending = 0, PaymentRefused = 1, Received = 2, Preparing = 3, Ready = 4, Completed = 5) |
+| CreatedAt      | TIMESTAMPTZ  | Não Nulo            | Data e hora de criação do pedido                  |
+| TotalPrice     | DECIMAL      |                     | Preço total do pedido                          |
+| QrCodePayment  | VARCHAR(1000)|                     | Código QR para pagamento (gerado pelo MercadoPago)         |
+| PaymentStatusDate | TIMESTAMPTZ |                     | Data e hora da última atualização do status de pagamento |
+
+### Tabela "orderItems"
+
+A tabela `orderItems` relaciona os produtos aos pedidos e registra os itens de cada pedido.
+
+| Campo       | Tipo         | Restrições         | Observações                                          |
+|-------------|--------------|---------------------|------------------------------------------------------|
+| Id          | UUID         | Chave Primária      | Identificador único do item de pedido                  |
+| OrderId     | UUID         | Chave Estrangeira (Referencia "orders") | ID do pedido ao qual o item está relacionado  |
+| ProductId   | UUID         | Chave Estrangeira (Referencia "products") | ID do produto associado ao item de pedido   |
+| Quantity    | SMALLINT     | Não Nulo            | Quantidade do produto no pedido                      |
+| TotalPrice  | DECIMAL      | Não Nulo            | Preço total do item de pedido                        |
+
+### Relacionamentos
+
+1. **Tabela "orders" e "customers"**: A tabela "orders" possui uma chave estrangeira "CustomerId" que referencia a tabela "customers", representando a relação de que um pedido pertence a um cliente específico.
+
+2. **Tabela "orderItems", "orders" e "products"**: A tabela "orderItems" possui chaves estrangeiras "OrderId" e "ProductId" que referenciam as tabelas "orders" e "products", respectivamente. Isso estabelece a relação de que um item de pedido está associado a um pedido específico e a um produto específico.
+
+
 ## Tech Challenge
 Projeto para a curso de [Pós Graduação FIAP - Software Architecture](https://postech.fiap.com.br/curso/software-architecture/).
 
