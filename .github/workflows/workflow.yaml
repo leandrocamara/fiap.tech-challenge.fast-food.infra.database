@@ -13,8 +13,10 @@ env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-  DB_USERNAME: ${{ secrets.DB_USERNAME }}
-  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_ORDERS_USERNAME: ${{ secrets.DB_ORDERS_USERNAME }}
+  DB_ORDERS_PASSWORD: ${{ secrets.DB_ORDERS_PASSWORD }}
+  DB_PAYMENTS_USERNAME: ${{ secrets.DB_PAYMENTS_USERNAME }}
+  DB_PAYMENTS_PASSWORD: ${{ secrets.DB_PAYMENTS_PASSWORD }}
 
 jobs:
   CI:
@@ -45,8 +47,10 @@ jobs:
         id: plan
         run: |
           terraform plan -no-color \
-            -var "username=${{ env.DB_USERNAME }}" \
-            -var "password=${{ env.DB_PASSWORD }}"
+            -var "ordersUsername=${{ env.DB_ORDERS_USERNAME }}" \
+            -var "ordersPassword=${{ env.DB_ORDERS_PASSWORD }}" \
+            -var "paymentsUsername=${{ env.DB_PAYMENTS_USERNAME }}" \
+            -var "paymentsPassword=${{ env.DB_PAYMENTS_PASSWORD }}"
         continue-on-error: true
 
       - name: Terraform Plan Status
@@ -133,8 +137,10 @@ jobs:
       - name: Terraform Apply
         run: |
           terraform apply -auto-approve \
-            -var "username=${{ env.DB_USERNAME }}" \
-            -var "password=${{ env.DB_PASSWORD }}"
+            -var "ordersUsername=${{ env.DB_ORDERS_USERNAME }}" \
+            -var "ordersPassword=${{ env.DB_ORDERS_PASSWORD }}" \
+            -var "paymentsUsername=${{ env.DB_PAYMENTS_USERNAME }}" \
+            -var "paymentsPassword=${{ env.DB_PAYMENTS_PASSWORD }}"
 
       - uses: trstringer/manual-approval@v1
         timeout-minutes: 60
@@ -148,8 +154,10 @@ jobs:
           AWS_ACCESS_KEY_ID: ""
           AWS_SECRET_ACCESS_KEY: ""
           AWS_SESSION_TOKEN: ""
-          DB_USERNAME: ""
-          DB_PASSWORD: ""
+          DB_ORDERS_USERNAME: ""
+          DB_ORDERS_PASSWORD: ""
+          DB_PAYMENTS_USERNAME: ""
+          DB_PAYMENTS_PASSWORD: ""
 
       - name: Terraform Destroy
         run: terraform destroy -auto-approve

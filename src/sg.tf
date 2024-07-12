@@ -1,5 +1,5 @@
 resource "aws_security_group" "sg" {
-  name        = "SG-${var.projectName}"
+  name        = "SG-databases"
   description = "This group is used AWS RDS"
   vpc_id      = data.aws_vpc.default.id
 
