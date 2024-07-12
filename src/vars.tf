@@ -2,18 +2,22 @@ variable "regionDefault" {
   default = "us-east-1"
 }
 
-variable "projectName" {
-  default = "fastfood"
-}
-
 variable "instanceClass" {
   default = "db.t3.micro"
 }
 
-variable "username" {
+variable "ordersUsername" {
   default = "postgres"
 }
 
-variable "password" {
+variable "ordersPassword" {
+  default = "postgres"
+}
+
+variable "paymentsUsername" {
+  default = "postgres"
+}
+
+variable "paymentsPassword" {
   default = "postgres"
 }
