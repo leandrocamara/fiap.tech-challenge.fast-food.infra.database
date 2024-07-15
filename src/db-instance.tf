@@ -33,30 +33,3 @@ resource "aws_db_instance" "db_payments_instance" {
 
   depends_on = [aws_security_group.sg]
 }
-
-resource "aws_dynamodb_table" "tickes_table" {
-  name           = "tickets"
-  billing_mode   = "PAY_PER_REQUEST"
-  hash_key       = "pk"
-  range_key      = "sk"
-  
-  attribute {
-    name = "pk"
-    type = "S"
-  }
-
-  attribute {
-    name = "sk"
-    type = "S"
-  }
-
-  tags = {
-    Name        = "tickes_table"
-    Environment = "production"
-  }
-
-  ttl {
-    attribute_name = "ttl"
-    enabled        = true
-  }
-}
