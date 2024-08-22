@@ -12,3 +12,8 @@ resource "aws_sqs_queue" "ticket_created" {
 resource "aws_sqs_queue" "ticket_updated" {
   name = "ticket-updated"
 }
+
+# Criando a fila order-status-updated
+resource "aws_sqs_queue" "order_status_updated" {
+  name = "order-status-updated"
+}
